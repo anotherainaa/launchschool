@@ -45,3 +45,8 @@ my_truck = Motorcycle.new("Ford Ranger", 2015)
 puts my_car
 puts my_motorcyle
 puts my_truck
+
+# further exploration
+# Would it make sense to define a `wheels` method in vehicle even if all of the remaining class would override it? 
+# It depends if `wheels` is an important state that needs to be tracked for what we want to achieve. 
+# It makes sense to have it if we want to 
