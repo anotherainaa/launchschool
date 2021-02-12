@@ -20,3 +20,5 @@ end
 dog = Dog.new("rex")
 dog.change_nickname("barny") # changed nickname to "barny"
 puts dog.greeting # Displays: Barny says Woof Woof!
+
+# Check notes on calling self on private getter and setter methods
