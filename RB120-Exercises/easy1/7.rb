@@ -28,4 +28,4 @@ car.print_mileage  # should print 5678
 
 # Referring the instance variable `@mileage` directly bypasses the setter method entirely which may not be what we want. 
 # For example, the setter method could be applying `#to_i` to the parameter (input) to ensure that inputs are always Integer objects.
-# Without this, we could re-assign `@mileage` to a string value. 
+# Without this, we could re-assign `@mileage` to a string value.
