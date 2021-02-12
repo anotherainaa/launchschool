@@ -1,7 +1,9 @@
+# rubocop:disable Naming/FileName
+
 # 1 - Create a new class called `Cat`
 # 2 - It can do everything a dog can except swim or fetch
 # Assume the methods do the exact same thing
-# Hint: Don't copy paste all methods use some class Hierarchy 
+# Hint: Don't copy paste all methods use some class Hierarchy
 
 class Animal
   def swim
@@ -43,4 +45,6 @@ puts Cat.ancestors
 puts Dog.ancestors
 
 # Note that example uses Pet instead of Animal
-# Think about why this is a better choice than Animal. 
+# Think about why this is a better choice than Animal.
+
+# rubocop:enable Naming/FileName

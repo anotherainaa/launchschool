@@ -14,7 +14,8 @@ class Dog
   end
 
   private
-    attr_writer :nickname
+
+  attr_writer :nickname
 end
 
 dog = Dog.new("rex")
