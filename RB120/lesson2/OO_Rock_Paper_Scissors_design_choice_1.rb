@@ -40,22 +40,6 @@ class Computer < Player
   end
 end
 
-class Move
-  def initialize
-    # seems like we need something to keep track
-    # of the choice: moves can be rock , paper or scissors
-  end
-end
-
-class Rule
-  def initialize
-    # not sure what the "state" of a rule object should be
-  end
-end
-
-def compare(move1, move2)
-end
-
 class RPSGame
   attr_reader :human, :computer
 
