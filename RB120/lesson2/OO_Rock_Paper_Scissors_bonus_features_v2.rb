@@ -156,6 +156,12 @@ class Baymax < Computer
   end
 
   def choose
+    choose_rock_only
+  end
+
+  private
+
+  def choose_rock_only
     self.move = Move.new(Move::VALUES[1])
   end
 end
@@ -169,7 +175,7 @@ class R2D2 < Computer
     if history.empty?
       super
     else
-      self.move = Move.new(predict_winning_move(history.last))
+      self.move = predict_winning_move(history.last)
     end
   end
 
@@ -177,9 +183,9 @@ class R2D2 < Computer
 
   def predict_winning_move(previous_move)
     if won_last_round
-      previous_move.value.loses_to.sample
+      Move.new(previous_move.value.loses_to.sample)
     else
-      previous_move.value.beats.sample
+      Move.new(previous_move.value.beats.sample)
     end
   end
 end
