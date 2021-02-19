@@ -9,9 +9,13 @@ class Machine
     flip_switch(:off)
   end
 
+  def display_switch
+    switch
+  end
+
   private
 
-  attr_writer :switch
+  attr_accessor :switch
 
   def flip_switch(desired_state)
     self.switch = desired_state
@@ -20,10 +24,13 @@ end
 
 my_machine = Machine.new
 my_machine.start
-p my_machine.switch
+p my_machine.display_switch
+# p my_machine.switch
 # Note that we can't call this method unless we define a getter method
+# Further exploration, here we can't call the switch method directly
+# because the getter method is private.
 my_machine.stop
-p my_machine.switch
+p my_machine.display_switch
 
 # We move the `attr_writer :switch` and `flip_switch` method under the reserved
 # keyword `private` which turns the two method into private methods.
