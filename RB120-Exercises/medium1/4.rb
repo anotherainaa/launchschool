@@ -28,6 +28,10 @@ class CircularQueue
     self.next_position = (next_position + 1) % buffer.length
   end
 
+  def empty?
+    @buffer.count(nil) == @buffer.length
+  end
+
   def full?
     buffer.count(nil) == 0
   end
@@ -123,6 +127,14 @@ puts queue.dequeue == "a"
 puts queue.dequeue == "b"
 puts queue.dequeue == 7
 puts queue.dequeue == nil
+p queue
+
+queue.enqueue("a")
+p queue
+queue.enqueue("b")
+
+queue.dequeue
+p queue
 
 queue = CircularQueue.new(4)
 puts queue.dequeue == nil

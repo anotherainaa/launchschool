@@ -28,7 +28,10 @@ end
 ```
 
 The second time around yielded a different result but not quite the answer I was
-looking for. The problem with the second time is that I had relied on the argument that was passed into the `enqueue` method to help me determine the oldest position.
+looking for. The problem with the second time is that I didn't understand the relationship between the circular queue and how it affects the position.
+
+Instead, I had relied on the number of `nil` inside of the array to figure out where
+to put the next object. I also used the argument that was passed into the `enqueue` method to help me determine the position of the oldest object.
 
 This answer resulted in getting all the test codes to return `true`. However, it would
 not work as soon as I mixed the arguments passed into `enqueue` method with another object such as `a` or `b` which tells me again that I'm not fulfilling the requirements.
@@ -107,18 +110,24 @@ puts queue.dequeue == nil
 The third time around was when I finally understood what it means that the circle
 is connected end-to-end.
 
-While the first object that goes into the queue can go in any position at all, the next position at which an input goes is actually directly related to the position of the previously queued object.
+While the first object that goes into the queue can go in any position at all, the next position at which an input goes in is actually directly related to the position of the previously queued object.
 
 For example, take the given first test with a queue of size 3.
 If we start at index 0, the next position will always be index 1 and not
 just any position that is empty or has a value of `nil`.
 If we start at index index 3, the next position will always be index 0.
 
-This is related to the circular "shape" of the queue. The next position wraps around the circular shape of the queue.
+Same goes for the oldest object. The oldest object is always the same object that
+was first input into the queue.
+The oldest object would never change until we dequeue.
+When we dequeue, the next oldest object is always the object after the object removed because we always input the next position based on the one before it.
+The only exception is when there is nothing in the queue which e
+
+
 
 By understanding this, I could finally figure out how to set `@next_position` and
 `@oldest_position` and finally arriving to a solution that is coded slightly different but
-uses the same mechanics to the solution provided.
+uses the same mechanics to the LS solution provided.
 
 ```Ruby
 class CircularQueue
@@ -137,7 +146,7 @@ class CircularQueue
   def dequeue
     removed_value = @buffer[@oldest_position]
     @buffer[@oldest_position] = nil
-    find_oldest_position
+    find_oldest_position unless removed.nil?
     removed_value
   end
 
@@ -146,15 +155,7 @@ class CircularQueue
   end
 
   def find_oldest_position
-    if empty?
-       @oldest_position = 0
-    else
-      @oldest_position = (@oldest_position + 1) % @buffer.length
-    end
-  end
-
-  def empty?
-    @buffer.count(nil) == @buffer.length
+    @oldest_position = (@oldest_position + 1) % @buffer.length
   end
 
   def full?
