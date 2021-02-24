@@ -1,5 +1,3 @@
-
-
 class CircularQueue
   def initialize(size)
     @buffer = Array.new(size)
@@ -26,10 +24,6 @@ class CircularQueue
 
   def find_next_position
     self.next_position = (next_position + 1) % buffer.length
-  end
-
-  def empty?
-    @buffer.count(nil) == @buffer.length
   end
 
   def full?
