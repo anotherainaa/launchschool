@@ -109,8 +109,15 @@ puts johns_postal_service.send_mail(ellens_postal_service.street_address, Postca
 
 # Problem
 . We should not overwrite the original #send method.
-. keyword: accidental method overwriting.
   . To fix this, we can rename `send` method to `send_mail` instead.
+
+# LS Notes
+. keyword: accidental method overwriting.
+. question: why does Ruby not complaint that there is no method `send`?
+  . Ruby looks for `sen` on the method lookup path,
+  . and it finds the method with this name in the `Object` class.
+  . so it calls `Object#send` method, which expects a method name as the arg.
+  . The argument provided is not the name of any method, we get an error.
 
 
 =end
