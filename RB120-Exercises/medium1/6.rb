@@ -94,6 +94,5 @@ class GuessingGame
   end
 end
 
-
 game = GuessingGame.new
 game.play
