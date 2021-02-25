@@ -14,9 +14,9 @@ class Deck
   private
 
   def create_deck
-    shuffle_cards
     @deck = []
     SUITS.each do |suit|
+      shuffle_cards
       @shuffled.each do |rank|
         @deck << Card.new(rank, suit)
       end
