@@ -27,9 +27,9 @@ class GeoLocation
     self.to_s == other_location.to_s
   end
 
-  def ==(other)
-    latiture == other.latitude && longitude == other.longitude
-  end
+  # def ==(other)
+  #   latiture == other.latitude && longitude == other.longitude
+  # end
 end
 
 # Example
