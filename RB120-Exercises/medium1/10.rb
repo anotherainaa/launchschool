@@ -1,12 +1,15 @@
 class PokerHand
   def initialize(deck)
-    @hand = deck
+    @hand = []
+
+    5.times do
+      card = deck.draw
+      @hand << card
+    end
   end
 
   def print
-    @hand.each do |card|
-      puts card
-    end
+    puts @hand
   end
 
   def evaluate
@@ -27,9 +30,18 @@ class PokerHand
   private
 
   def royal_flush?
+    suits = @hand.map(&:suit)
+    ranks = @hand.map {|card| card.value[0] + 2}
+    if suits.uniq.length == 1
+      true if ranks.sum == 60
+    end
   end
 
   def straight_flush?
+    suits = @hand.map(&:suit)
+    if suits.uniq.length == 1
+      straight?
+    end
   end
 
   def four_of_a_kind?
@@ -39,6 +51,12 @@ class PokerHand
   end
 
   def full_house?
+    ranks = @hand.map(&:rank)
+    if ranks.uniq.length == 2
+      uniq = ranks.uniq
+      (ranks.count(uniq[0]) == 3 && ranks.count(uniq[1]) == 2) ||
+        (ranks.count(uniq[1]) == 3 && ranks.count(uniq[0]) == 2)
+    end
   end
 
   def flush?
@@ -133,9 +151,15 @@ class Card
 end
 
 
-# hand = PokerHand.new(Deck.new)
-# hand.print
-# puts hand.evaluate
+hand = PokerHand.new(Deck.new)
+hand.print
+puts hand.evaluate
+
+# Danger danger danger: monkey
+# patching for testing purposes.
+class Array
+  alias_method :draw, :pop
+end
 
 hand = PokerHand.new([
   Card.new(10,      'Hearts'),
