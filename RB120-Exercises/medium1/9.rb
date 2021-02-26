@@ -16,19 +16,19 @@ class Deck
   def create_deck
     @deck = []
     SUITS.each do |suit|
-      shuffle_cards
-      @shuffled.each do |rank|
+      RANKS.each do |rank|
         @deck << Card.new(rank, suit)
       end
     end
+    shuffle_cards
   end
 
   def shuffle_cards
-    @shuffled = []
-    cards = RANKS.dup
+    cards = @deck.dup
+    @deck = []
     until cards.empty?
       random = rand(0...cards.length)
-      @shuffled << cards.delete_at(random)
+      @deck << cards.delete_at(random)
     end
   end
 end
@@ -37,6 +37,7 @@ class Card
   include Comparable
   attr_reader :rank, :suit
 
+  SUITS = ['Diamonds', 'Clubs', 'Hearts', 'Spades']
   VALUES = [2, 3, 4, 5, 6, 7, 8, 9, 10, "Jack", "Queen", "King", "Ace"]
 
   def initialize(rank, suit)
@@ -49,7 +50,7 @@ class Card
   end
 
   def value
-    VALUES.index(rank)
+    [VALUES.index(rank), SUITS.index(suit)]
   end
 
   def to_s
