@@ -124,17 +124,14 @@ class Player
 end
 
 class TTTGame
-  HUMAN_MARKER = "X"
-  COMPUTER_MARKER = "O"
-  FIRST_TO_MOVE = HUMAN_MARKER
+  MARKERS = ["X", "O"]
+  FIRST_TO_MOVE = MARKERS.sample
   WINNING_SCORE = 3
 
   attr_reader :board, :human, :computer
 
   def initialize
     @board = Board.new
-    @human = Player.new(HUMAN_MARKER)
-    @computer = Player.new(COMPUTER_MARKER)
     @current_marker = FIRST_TO_MOVE
   end
 
@@ -147,24 +144,23 @@ class TTTGame
 
   private
 
-  # def create_player(human_marker)
-  #   @human = Player.new(human_marker)
-  #   if human_marker == 'X' ?
-  #     @computer = Player.new("O")
-  #   else
-  #     @computer = Player.new("X")
-  #   end
-  # end
+  def create_players
+    human_marker = choose_marker
+    @human = Player.new(human_marker)
+    computer_marker = MARKERS.select { |marker| marker != human_marker }.first
+    @computer = Player.new(computer_marker)
+  end
 
-  # def choose_marker
-  #   marker = nil
-  #   loop do
-  #     puts "Choose your marker: X or O"
-  #     marker = gets.chomp
-  #     break if %w(X O).include?(marker)
-  #   end
-  #   create_player(marker)
-  # end
+  def choose_marker
+    marker = nil
+    loop do
+      puts "Choose your marker: #{MARKERS.join(" or ")}"
+      marker = gets.chomp.upcase
+      break if MARKERS.include?(marker)
+      puts "Invalid input. Please choose #{MARKERS.join(" or ")}"
+    end
+    marker
+  end
 
   def display_score
     puts "Your score     : #{human.score}"
@@ -173,6 +169,7 @@ class TTTGame
   end
 
   def main_game
+    create_players
     loop do
       play_one_round
       display_game_result
@@ -210,27 +207,28 @@ class TTTGame
   end
 
   def human_turn?
-    @current_marker == HUMAN_MARKER
+    @current_marker == human.marker
   end
 
   def current_player_moves
     if human_turn?
       human_moves
-      @current_marker = COMPUTER_MARKER
+      @current_marker = computer.marker
     else
       computer_moves
-      @current_marker = HUMAN_MARKER
+      @current_marker = human.marker
     end
   end
 
   def reset_game
-    score.reset
+    human.reset_score
+    computer.reset_score
     reset
   end
 
   def reset
     board.reset
-    @current_marker = [HUMAN_MARKER, COMPUTER_MARKER].sample
+    @current_marker = [human.marker, computer.marker].sample
     clear
   end
 
