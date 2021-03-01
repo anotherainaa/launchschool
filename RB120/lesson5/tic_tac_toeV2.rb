@@ -107,9 +107,10 @@ class Square
 end
 
 class Player
-  attr_reader :marker, :score
+  attr_reader :name, :marker, :score
 
-  def initialize(marker)
+  def initialize(name, marker)
+    @name = name
     @marker = marker
     @score = 0
   end
@@ -125,6 +126,7 @@ end
 
 class TTTGame
   MARKERS = ["X", "O"]
+  COMPUTER_NAMES = ["Baymax", "R2D2", "Sam"]
   FIRST_TO_MOVE = MARKERS.sample
   WINNING_SCORE = 3
 
@@ -132,7 +134,7 @@ class TTTGame
 
   def initialize
     @board = Board.new
-    @current_marker = FIRST_TO_MOVE
+    @current_marker = randomize_first_to_move
   end
 
   def play
@@ -144,11 +146,29 @@ class TTTGame
 
   private
 
+  def randomize_first_to_move
+    MARKERS.sample
+  end
+
+  def set_name
+    answer = nil
+    loop do
+      puts "What's your name?"
+      answer = gets.chomp.capitalize
+      break if answer != ""
+      puts "Name cannot be empty."
+    end
+    answer
+  end
+
   def create_players
+    human_name = set_name
     human_marker = choose_marker
-    @human = Player.new(human_marker)
+    @human = Player.new(human_name, human_marker)
     computer_marker = MARKERS.select { |marker| marker != human_marker }.first
-    @computer = Player.new(computer_marker)
+    computer_name = COMPUTER_NAMES.sample
+    @computer = Player.new(computer_name, computer_marker)
+    clear
   end
 
   def choose_marker
@@ -163,13 +183,14 @@ class TTTGame
   end
 
   def display_score
-    puts "Your score     : #{human.score}"
-    puts "Computer score : #{computer.score}"
+    puts "#{human.name}'s score is #{human.score}."
+    puts "#{computer.name}'s score is #{computer.score}."
     puts ""
   end
 
   def main_game
     create_players
+    clear
     loop do
       play_one_round
       display_game_result
@@ -183,8 +204,8 @@ class TTTGame
     loop do
       display_board
       player_move
-      display_round_result # display_round_result & increment score
-      break if someone_won_game? # only break when someone_won_game?
+      display_round_result
+      break if someone_won_game?
       reset
     end
   end
@@ -200,10 +221,6 @@ class TTTGame
 
   def clear
     system 'clear'
-  end
-
-  def wait_a_second
-    sleep(1)
   end
 
   def human_turn?
@@ -228,7 +245,7 @@ class TTTGame
 
   def reset
     board.reset
-    @current_marker = [human.marker, computer.marker].sample
+    @current_marker = randomize_first_to_move
     clear
   end
 
@@ -260,7 +277,8 @@ class TTTGame
 
   def display_board
     display_score
-    puts "You're a #{human.marker}. Computer is a #{computer.marker}."
+    puts "#{human.name}'s marker is #{human.marker}."
+    puts "#{computer.name}'s marker is #{computer.marker}."
     puts ""
     board.draw
     puts ""
@@ -305,7 +323,7 @@ class TTTGame
     else
       puts "It's a tie!"
     end
-    wait_a_second
+    sleep(1)
   end
 
   def someone_won_game?
