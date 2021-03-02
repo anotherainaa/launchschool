@@ -1,4 +1,5 @@
-require 'pry'
+# rubocop:disable Naming/FileName
+# rubocop:enable Naming/FileName
 
 class Board
   WINNING_LINES = [[1, 2, 3], [4, 5, 6], [7, 8, 9]] + # rows
@@ -64,12 +65,11 @@ class Board
     @squares[5].unmarked?
   end
 
-  def at_risk_square
+  def potential_square(marker_type)
     WINNING_LINES.each do |line|
       squares = @squares.values_at(*line)
-      if n_identical_markers?(squares, 2)
-        return @squares.select do |k, v| line.include?(k) && v.unmarked?
-          end.keys.first
+      if n_identical_markers?(squares, 2, marker_type)
+        return line.select { |k| @squares[k].unmarked? }.first
       end
     end
     nil
@@ -77,10 +77,13 @@ class Board
 
   private
 
-  def n_identical_markers?(squares, num)
+  def n_identical_markers?(squares, num, marker_type = nil)
     markers = squares.select(&:marked?).collect(&:marker)
     return false if markers.size != num
-    markers.uniq.size == 1
+    if marker_type
+      return false if !markers.all?(marker_type)
+    end
+    markers.min == markers.max
   end
 end
 
@@ -106,14 +109,8 @@ class Square
   end
 end
 
-class Player
-  attr_reader :name, :marker, :score
-
-  def initialize(name, marker)
-    @name = name
-    @marker = marker
-    @score = 0
-  end
+module Scoreable
+  WINNING_SCORE = 3
 
   def increment_score
     @score += 1
@@ -122,15 +119,109 @@ class Player
   def reset_score
     @score = 0
   end
+
+  def show_score
+    puts "#{name}'s score is #{score}."
+  end
+
+  def won_game?
+    score == WINNING_SCORE
+  end
+end
+
+class Player
+  include Scoreable
+
+  @@human_marker = nil
+  @@computer_marker = nil
+
+  attr_reader :name, :marker, :score
+
+  def initialize
+    @name = set_name
+    @marker = set_marker
+    @score = 0
+  end
+
+  def show_marker
+    puts "#{name}'s marker is #{marker}."
+  end
+end
+
+class Human < Player
+  def set_name
+    answer = nil
+    loop do
+      puts "What's your name?"
+      answer = gets.chomp.capitalize
+      break if answer != ""
+      puts "Name cannot be empty."
+    end
+    answer
+  end
+
+  def set_marker
+    marker = nil
+    loop do
+      puts "Choose your marker: #{TTTGame::MARKERS.join(' or ')}"
+      marker = gets.chomp.upcase
+      break if TTTGame::MARKERS.include?(marker)
+      puts "Invalid input. Please choose #{TTTGame::MARKERS.join(' or ')}"
+    end
+    @@human_marker = marker
+  end
+
+  def choose_square(squares)
+    square = nil
+    loop do
+      square = gets.chomp
+      break if squares.map(&:to_s).include?(square)
+      puts "Sorry, that's not a valid choice."
+    end
+    square.to_i
+  end
+end
+
+class Computer < Player
+  COMPUTER_NAMES = ["Baymax", "R2D2", "Sam"]
+
+  def set_name
+    COMPUTER_NAMES.sample
+  end
+
+  def set_marker
+    @@computer_marker = TTTGame::MARKERS.select do |marker|
+      marker != @@human_marker
+    end.first
+  end
+
+  def choose_square(board)
+    if board.center_empty?
+      5
+    elsif find_winning_square(board)
+      find_winning_square(board)
+    elsif find_at_risk_square(board)
+      find_at_risk_square(board)
+    else
+      board.unmarked_keys.sample
+    end
+  end
+
+  private
+
+  def find_at_risk_square(board)
+    board.potential_square(@@human_marker)
+  end
+
+  def find_winning_square(board)
+    board.potential_square(@@computer_marker)
+  end
 end
 
 class TTTGame
-  MARKERS = ["X", "O"]
-  COMPUTER_NAMES = ["Baymax", "R2D2", "Sam"]
-  FIRST_TO_MOVE = MARKERS.sample
-  WINNING_SCORE = 3
-
   attr_reader :board, :human, :computer
+
+  MARKERS = ["X", "O"]
 
   def initialize
     @board = Board.new
@@ -150,47 +241,28 @@ class TTTGame
     MARKERS.sample
   end
 
-  def set_name
-    answer = nil
-    loop do
-      puts "What's your name?"
-      answer = gets.chomp.capitalize
-      break if answer != ""
-      puts "Name cannot be empty."
-    end
-    answer
-  end
-
   def create_players
-    human_name = set_name
-    human_marker = choose_marker
-    @human = Player.new(human_name, human_marker)
-    computer_marker = MARKERS.select { |marker| marker != human_marker }.first
-    computer_name = COMPUTER_NAMES.sample
-    @computer = Player.new(computer_name, computer_marker)
+    @human = Human.new
+    @computer = Computer.new
     clear
-  end
-
-  def choose_marker
-    marker = nil
-    loop do
-      puts "Choose your marker: #{MARKERS.join(" or ")}"
-      marker = gets.chomp.upcase
-      break if MARKERS.include?(marker)
-      puts "Invalid input. Please choose #{MARKERS.join(" or ")}"
-    end
-    marker
   end
 
   def display_score
-    puts "#{human.name}'s score is #{human.score}."
-    puts "#{computer.name}'s score is #{computer.score}."
-    puts ""
+    human.show_score
+    computer.show_score
+    spacing
+  end
+
+  def display_rules
+    puts "Game rules:"
+    puts "1. First player to win 5 rounds wins the game."
+    puts "2. First mover is selected at random."
+    spacing
   end
 
   def main_game
+    display_rules
     create_players
-    clear
     loop do
       play_one_round
       display_game_result
@@ -204,6 +276,7 @@ class TTTGame
     loop do
       display_board
       player_move
+      update_score
       display_round_result
       break if someone_won_game?
       reset
@@ -220,7 +293,15 @@ class TTTGame
   end
 
   def clear
-    system 'clear'
+    system 'clear' || system('cls')
+  end
+
+  def pause
+    sleep(0.8)
+  end
+
+  def spacing
+    puts ""
   end
 
   def human_turn?
@@ -251,7 +332,8 @@ class TTTGame
 
   def display_play_again_message
     puts "Let's play again!"
-    puts ''
+    spacing
+    pause
   end
 
   def play_again?
@@ -260,7 +342,7 @@ class TTTGame
       puts "Would you like to play again? (y/n)"
       answer = gets.chomp.downcase
       break if %w(y n).include? answer
-      puts "Sorry, must be y or n"
+      puts "Sorry, must be y or n."
     end
 
     answer == 'y'
@@ -268,20 +350,24 @@ class TTTGame
 
   def display_welcome_message
     puts "Welcome to Tic Tac Toe!"
-    puts ""
+    spacing
   end
 
   def display_goodbye_message
     puts "Thanks for playing Tic Tac Toe! Goodbye!"
   end
 
+  def display_marker
+    human.show_marker
+    computer.show_marker
+  end
+
   def display_board
     display_score
-    puts "#{human.name}'s marker is #{human.marker}."
-    puts "#{computer.name}'s marker is #{computer.marker}."
-    puts ""
+    display_marker
+    spacing
     board.draw
-    puts ""
+    spacing
   end
 
   def clear_screen_and_display_board
@@ -291,23 +377,21 @@ class TTTGame
 
   def human_moves
     puts "Choose a square between (#{board.unmarked_keys.join(', ')}):"
-    square = nil
-    loop do
-      square = gets.chomp.to_i
-      break if board.unmarked_keys.include?(square)
-      puts "Sorry, that's not a valid choice."
-    end
+    square = human.choose_square(board.unmarked_keys)
     board[square] = human.marker
   end
 
   def computer_moves
-    # play offense and defense
-    if board.center_empty?
-      board[5] = computer.marker
-    elsif board.at_risk_square
-      board[board.at_risk_square] = computer.marker
-    else
-      board[board.unmarked_keys.sample] = computer.marker
+    square = computer.choose_square(board)
+    board[square] = computer.marker
+  end
+
+  def update_score
+    case board.winning_marker
+    when human.marker
+      human.increment_score
+    when computer.marker
+      computer.increment_score
     end
   end
 
@@ -316,25 +400,23 @@ class TTTGame
     case board.winning_marker
     when human.marker
       puts "You won this round!"
-      human.increment_score
     when computer.marker
       puts "Computer won this round!"
-      computer.increment_score
     else
       puts "It's a tie!"
     end
-    sleep(1)
+    pause
   end
 
   def someone_won_game?
-    human.score == WINNING_SCORE || computer.score == WINNING_SCORE
+    human.won_game? || computer.won_game?
   end
 
   def display_game_result
     clear_screen_and_display_board
-    if human.score == WINNING_SCORE
+    if human.won_game?
       puts "You won the game!"
-    elsif computer.score == WINNING_SCORE
+    elsif computer.won_game?
       puts "Computer won the game!"
     end
   end
