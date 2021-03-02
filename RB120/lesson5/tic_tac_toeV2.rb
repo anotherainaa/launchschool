@@ -221,7 +221,7 @@ end
 class TTTGame
   attr_reader :board, :human, :computer
 
-  MARKERS = ["X", "O"]
+  MARKERS = ["X", "O", "Z"]
 
   def initialize
     @board = Board.new
