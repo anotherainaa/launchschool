@@ -4,12 +4,10 @@ module Hand
   end
 
   def stay
-    @total
     @current_move = "stay"
   end
 
   def busted?
-    total
     @total > 21
   end
 
