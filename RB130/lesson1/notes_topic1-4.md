@@ -170,6 +170,8 @@ def test(&block)
   test2(block)
   puts "2"
 end
+
+test { puts "what up" }
 ```
 
 **This is a simplified explanation**
