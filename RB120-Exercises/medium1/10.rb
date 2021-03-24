@@ -171,14 +171,14 @@ end
 # ])
 # puts hand.evaluate == 'Royal flush'
 
-hand = PokerHand.new([
-  Card.new(8,       'Clubs'),
-  Card.new(9,       'Clubs'),
-  Card.new('Queen', 'Clubs'),
-  Card.new(10,      'Clubs'),
-  Card.new('Jack',  'Clubs')
-])
-puts hand.evaluate == 'Straight flush'
+# hand = PokerHand.new([
+#   Card.new(8,       'Clubs'),
+#   Card.new(9,       'Clubs'),
+#   Card.new('Queen', 'Clubs'),
+#   Card.new(10,      'Clubs'),
+#   Card.new('Jack',  'Clubs')
+# ])
+# puts hand.evaluate == 'Straight flush'
 
 # hand = PokerHand.new([
 #   Card.new(3, 'Hearts'),
