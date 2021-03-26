@@ -75,32 +75,90 @@ class TodoListTest < MiniTest::Test
   end
 
   def test_mark_done_at
+    assert_raises(IndexError) { @list.mark_done_at(100) }
+    @list.mark_done_at(0)
+    assert_equal(true, @todo1.done?)
+    assert_equal(false, @todo2.done?)
+    assert_equal(false, @todo3.done?)
   end
 
-  def test_mark_undeone_at
+  def test_mark_undone_at
+    assert_raises(IndexError) { @list.mark_done_at(100) }
+    @todo1.done!
+    @todo2.done!
+    @todo3.done!
+
+    @list.mark_undone_at(0)
+
+    assert_equal(false, @todo1.done?)
+    assert_equal(true, @todo2.done?)
+    assert_equal(true, @todo3.done?)
   end
 
   def test_done!
+    @list.done!
+    assert_equal(true, @todo1.done?)
+    assert_equal(true, @todo2.done?)
+    assert_equal(true, @todo3.done?)
+    assert_equal(true, @list.done?)
   end
 
   def test_remove_at
+    assert_raises(IndexError) { @list.remove_at(100) }
+    @list.remove_at(1)
+    assert_equal([@todo1, @todo3], @list.to_a)
   end
 
   def test_to_s
+    output = <<~OUTPUT.chomp
+    ---- Today's Todos ----
+    [ ] Buy milk
+    [ ] Clean room
+    [ ] Go to gym
+    OUTPUT
+    assert_equal(output, @list.to_s)
   end
 
   def test_to_s_2
+    @list.mark_done_at(0)
+    output = <<~OUTPUT.chomp
+    ---- Today's Todos ----
+    [X] Buy milk
+    [ ] Clean room
+    [ ] Go to gym
+    OUTPUT
+    assert_equal(output, @list.to_s)
   end
 
   def test_to_s_3
+    @list.done!
+    output = <<~OUTPUT.chomp
+    ---- Today's Todos ----
+    [X] Buy milk
+    [X] Clean room
+    [X] Go to gym
+    OUTPUT
+    assert_equal(output, @list.to_s)
   end
 
   def test_each
+    result = []
+    @list.each do |todo|
+      result << todo
+    end
+
+    assert_equal([@todo1, @todo2, @todo3], result)
   end
 
   def test_each_2
+    assert_equal(@list, @list.each { nil })
   end
 
   def test_select
+    result = @list.select do |todo|
+      todo.title == "Buy milk"
+    end
+
+    assert_equal(@todo1, result.first)
   end
 end
