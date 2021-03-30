@@ -73,11 +73,9 @@ end
 # bubble_sort!(array)
 # p array == [3, 5]
 
-
 # array = [5, 3, 7]
 # bubble_sort!(array) { |first, second| first >= second }
 # p array == [7, 5, 3]
-
 
 # array = [6, 2, 7, 1, 4]
 # bubble_sort!(array)
@@ -86,7 +84,6 @@ end
 # array = [6, 12, 27, 22, 14]
 # bubble_sort!(array) { |first, second| (first % 7) <= (second % 7) }
 # p array == [14, 22, 12, 6, 27]
-
 
 # array = %w(sue Pete alice Tyler rachel Kim bonnie)
 # bubble_sort!(array)
