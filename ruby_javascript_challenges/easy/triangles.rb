@@ -16,11 +16,13 @@ class Triangle
   end
 
   def sides=(sides)
-    if sides.any? { |side| side <= 0 }
-      raise ArgumentError.new "Invalid triangle lengths"
-    elsif sides.sort[0..1].sum <= sides.sort[-1]
-      raise ArgumentError.new "Invalid triangle lengths"
-    end
+    raise ArgumentError.new "Invalid triangle lengths" unless valid?(sides)
     @sides = sides
+  end
+
+  private
+
+  def valid?(sides)
+    sides.all? { |side| side > 0 } && sides.sort[0..1].sum > sides.sort[-1]
   end
 end
