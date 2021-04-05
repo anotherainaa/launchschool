@@ -1,8 +1,8 @@
 class Triangle
   attr_reader :sides
 
-  def initialize(*sides)
-    self.sides = sides
+  def initialize(side1, side2, side3)
+    self.sides = [side1, side2, side3]
   end
 
   def kind

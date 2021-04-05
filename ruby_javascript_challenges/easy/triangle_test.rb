@@ -102,4 +102,11 @@ class TriangleTest < Minitest::Test
       triangle = Triangle.new(1, 1, 2)
     end
   end
+
+  def test_passing_in_4_arguments
+    # skip
+    assert_raises(ArgumentError) do
+      triangle = Triangle.new(10, 10, 7, 8)
+    end
+  end
 end
