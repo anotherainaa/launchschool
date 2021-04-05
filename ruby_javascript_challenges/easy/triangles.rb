@@ -1,15 +1,17 @@
 class Triangle
+  attr_reader :sides
+
   def initialize(*sides)
     self.sides = sides
   end
 
   def kind
-    if @sides.uniq.size == 1
-      @kind = 'equilateral'
-    elsif @sides.uniq.size == 2
-      @kind = 'isosceles'
+    if sides.uniq.size == 1
+      'equilateral'
+    elsif sides.uniq.size == 2
+      'isosceles'
     else
-      @kind = 'scalene'
+      'scalene'
     end
   end
 
