@@ -15,7 +15,11 @@ class Sieve
 end
 
 # The problem
-# Take the first prime, reject all the multiples of it
-# Take the next prime, reject all the multiples of it
+# Take the first prime, 2
+# save it as a prime
+# reject all the multiples of this prime
+# Take the next prime, 3
+# save it as a prim
+# reject all the multiples of it
 # keep going until you reach the end.
 # the numbers that are not rejected as you keep going are prime numbers.
