@@ -4,7 +4,7 @@ class Crypto
   end
 
   def normalize_plaintext
-    @text.delete("^A-Za-z0-9").downcase
+    @text.delete('^A-Za-z0-9').downcase
   end
 
   def size
