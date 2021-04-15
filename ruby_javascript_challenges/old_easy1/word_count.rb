@@ -11,9 +11,3 @@ class Phrase
     count
   end
 end
-
-phrase = Phrase.new("First: don't laugh. Then: don't cry.")
-p phrase.word_count
-
-phrase2 = Phrase.new("Joe can't tell between 'large' and large.")
-p phrase2.word_count
