@@ -33,3 +33,14 @@ p divisors(99400891) == [1, 9967, 9973, 99400891]
 # Further exploration
 # Half of the divisors gives you the other half.
 
+def divisors(number)
+  result = []
+
+  (1..Math.sqrt(number)).each do |element|
+    if number % element == 0
+      divisors << element
+      divisors << number / element
+    end
+  end
+  result.sort.uniq
+end
