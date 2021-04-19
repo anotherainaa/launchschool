@@ -36,41 +36,43 @@ end
 
 vowel sounds
 - aeuiou
-- x - ex
-
-- honest and herb?
-
-
-- y - especially if second letter is consonent?
-
-
+- x - when paired with a non vowel
+- y when paired with a non vowel
 
 consonent sounds
-- b
-- m
-- l
-- w
+- qu - edge cases
+- pretty much any combination which then follows a vowel.
 
-if the first two letter are consonents, take it behind?
-- p
-- k
+dialect
+- herb and honest? - skip for now?
+- every other h sound is not a vowel sound?
+  - hope
+  - hello
+  - hi
+  - hunter
+  - half
 
-- sc
--thr
+Algorithm
 
-- qu
-- *qu
+main method
+- split the phrases into words
+- for each word,
+  - traslate word into pig latin
+- join the phrase with a space
 
-- thr
-- sch
+translate word into pig latin
+- if the word starts with a vowel sound?
+  - combine word + ay
+- else (the word starts with a consonant)
+  - get the consonents and rest of word
+  - combine word + consonant + ay
+- return the new word.
 
-- ye
-- yt
-- xe
-- xr
+start with a vowel sound?
+- match words that start with aeiou or xy followed by aeiou
 
-most times - until we find the next aeiou?
-- qu?
-
+get consonants?
+- match words that start with qu follower by vowel OR any consonent combination
+  followed by consonent.
 
 =end
