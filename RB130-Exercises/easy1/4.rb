@@ -10,15 +10,31 @@
   # put it into a new array
 # return the new array
 
-def divisors(integer)
+# def divisors(integer)
+#   result = []
+#   (1..integer).to_a.each do |num|
+#     if integer % num == 0
+#       result << num
+#     end
+#   end
+#   result
+# end
+
+# Further exploration
+# Half of the divisors gives you the other half.
+
+def divisors(number)
   result = []
-  (1..integer).to_a.each do |num|
-    if integer % num == 0
-      result << num
+
+  (1..Math.sqrt(number)).each do |element|
+    if number % element == 0
+      result << element
+      result << number / element
     end
   end
-  result
+  result.sort.uniq
 end
+
 
 p divisors(1) == [1]
 p divisors(7) == [1, 7]
@@ -30,17 +46,4 @@ p divisors(99400891) == [1, 9967, 9973, 99400891]
 # . uses method #upto and #select
 # same variation of the above.
 
-# Further exploration
-# Half of the divisors gives you the other half.
 
-def divisors(number)
-  result = []
-
-  (1..Math.sqrt(number)).each do |element|
-    if number % element == 0
-      divisors << element
-      divisors << number / element
-    end
-  end
-  result.sort.uniq
-end
