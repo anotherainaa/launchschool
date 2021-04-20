@@ -38,6 +38,9 @@ end
 # Notes - cleaning up letters so that we only have letters instead of
 # invalid word
 
+# If my letter_score method doesn't work, it would return a hash,
+# should I opt for if statement like LS way?
+
 # PEDAC
 # How do you store the score - constant
 # Check that the scrabble input is valid
