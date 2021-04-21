@@ -2,24 +2,28 @@ class Diamond
   ALPHABETS = ("A".."Z").to_a
 
   def self.make_diamond(letter)
-    alphabet_position = ALPHABETS.find_index(letter) + 1
-    @diamond_width = (alphabet_position * 2) - 1
-    @half_width = @diamond_width / 2
+    @diamond_width = max_width(letter)
     @letters = ("A"..letter).to_a
 
     diamond = ""
     @diamond_width.times do |index|
-
-      if index == 0
-        diamond << make_first_last_row(index)
-      elsif index == @diamond_width - 1
+      if index == 0 || index == @diamond_width - 1
         diamond << make_first_last_row(0)
       else
-        index = invert_index(index) if index > @half_width
+        index = invert_index(index) if index > half_width
         diamond << make_other_row(index)
       end
     end
     diamond
+  end
+
+  def self.max_width(letter)
+    alphabet_position = ALPHABETS.find_index(letter) + 1
+    (alphabet_position * 2) - 1
+  end
+
+  def self.half_width
+    @diamond_width / 2
   end
 
   def self.invert_index(index)
@@ -27,19 +31,19 @@ class Diamond
   end
 
   def self.make_first_last_row(index)
-    outer_spaces = " " * (@half_width - index)
-    outer_spaces + @letters[index] + outer_spaces + "\n"
+    outer_spaces = " " * (half_width - index)
+    "#{outer_spaces}#{@letters[index]}#{outer_spaces}\n"
   end
 
   def self.make_other_row(index)
-    outer_spaces = " " * (@half_width - index)
+    outer_spaces = " " * (half_width - index)
     middle_spaces = " " * (@diamond_width - (outer_spaces.length * 2) - 2)
-    outer_spaces + @letters[index] + middle_spaces +  @letters[index] + outer_spaces + "\n"
+    "#{outer_spaces}#{@letters[index]}#{middle_spaces}"\
+    "#{@letters[index]}#{outer_spaces}\n"
   end
 end
 
 Diamond.make_diamond('D')
-
 
 =begin
 
