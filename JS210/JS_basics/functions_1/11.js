@@ -36,4 +36,4 @@ console.log(localGreet('en_AU.UTF-8')); // 'Howdy!'
 
 console.log(localGreet('fr_FR.UTF-8')); // 'Salut!'
 console.log(localGreet('fr_CA.UTF-8')); // 'Salut!'
-console.log(localGreet('fr_MA.UTF-8')); // 'Salut!'
+console.log(localGreet('fr_MA.UTF-8')); // 'Salutouch
