@@ -1,8 +1,6 @@
-// Write a while loop that logs all odd natural numbers between 1 and 40.
+let fish = ['Dory', 'Marlin', 'Gill', 'Nemo', 'Bruce'];
 
-number = 1 
-
-while (number <= 40) {
-  console.log(number);
-  number += 2;
-}
+fish.forEach(name => {
+  console.log(name);
+  break if name === 'Nemo';
+});
