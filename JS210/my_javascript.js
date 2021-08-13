@@ -71,4 +71,4 @@ function isNegativeZero(value) {
 
 
 console.log(isNegativeZero(0));
-console.log(isNegativeZero(-0));
+console.log(isNegativeZero(-0));llgit 
