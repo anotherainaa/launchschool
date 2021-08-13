@@ -12,3 +12,13 @@ for (let i = 0; i <= 10; i += 2) {
 // In the condition, the loop will run until `i` is equal to 10 (10 included.)
 // In the incrementor, we can tell that `i` will increment by 2 each time. 
 // Hence, the resulting output will be 0, 2, 4, 6, 8, and 10 respectievly. 
+
+// Notes
+// - it may be better to use keywords such as initialExpression, Condition and incrementExpression. 
+// followed by a statement. 
+
+// for ([initialExpression]; [condition]; [incrementExpression]) {
+//   statement
+// }
+
+
