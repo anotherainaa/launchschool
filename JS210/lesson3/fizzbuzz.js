@@ -7,7 +7,6 @@ function multipleOfFive(number) {
   return number % 5 === 0;
 }
 
-
 function multiplesOfThreeAndFive() {
   for (let currentNumber = 1; currentNumber <= 100; currentNumber++) {
     if (multipleOfThree(currentNumber) && multipleOfFive(currentNumber)) {
@@ -21,6 +20,5 @@ function multiplesOfThreeAndFive() {
     }
   }
 }
-
 
 multiplesOfThreeAndFive();
