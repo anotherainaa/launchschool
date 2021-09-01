@@ -4,3 +4,6 @@ let vocabulary = [
   ['excited', 'eager', 'enthused', 'animated']
 ];
 
+vocabulary.forEach(arr => {
+  arr.forEach(word => console.log(word));
+});
