@@ -29,7 +29,6 @@ function splice(array, start, deleteCount, element1, elementN) {
   
   for (let i = start; i < start + deleteCount; i++) {
     newArray.push(array[i]);
-
   }
 
   if (element1) {
