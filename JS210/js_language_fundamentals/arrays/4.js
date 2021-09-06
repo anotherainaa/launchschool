@@ -1,15 +1,18 @@
 
-function concat(array1, ...theArgs) {
-  let resultArray = [];
+function concat(...theArgs) {
+  const resultArray = [];
 
-  array1.forEach(element => {
-    resultArray.push(element);
+  theArgs.forEach(element => {
+    if (Array.isArray(element)) {
+      element.forEach(e => resultArray.push(e))
+    } else {
+      resultArray.push(element);
+    }
   })
-
-  theArgs.forEach(element => console.log(element)l=l)
+  return resultArray;
 }
 
 
-concat([1, 2, 3], [4, 5, 6], [7, 8, 9]);    // [1, 2, 3, 4, 5, 6, 7, 8, 9]
-concat([1, 2], 'a', ['one', 'two']);        // [1, 2, "a", "one", "two"]
-concat([1, 2], ['three'], 4);               // [1, 2, "three", 4]
+console.log(concat([1, 2, 3], [4, 5, 6], [7, 8, 9]));    // [1, 2, 3, 4, 5, 6, 7, 8, 9]
+console.log(concat([1, 2], 'a', ['one', 'two']));        // [1, 2, "a", "one", "two"]
+console.log(concat([1, 2], ['three'], 4));               // [1, 2, "three", 4]
