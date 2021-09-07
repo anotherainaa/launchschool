@@ -23,22 +23,42 @@
 // - return the resulting string. 
 
 
+// function substr(string, start, length) {
+//   let index = start < 0 ? string.length + start : start;
+//   let finalLength = length > string.length - index ? string.length - index : length;
+  
+//   let resultStr = '';
+//   for (let counter = 0; counter < finalLength; counter++) {
+//     resultStr += string[index];
+//     index++;
+//   }
+//   console.log(resultStr);
+// }
+
+// let string = 'hello world';
+
+// substr(string, 2, 4);      // "llo "
+// substr(string, -3, 2);     // "rl"
+// substr(string, 8, 20);     // "rld"
+// substr(string, 0, -20);    // ""
+// substr(string, 0, 0);  // ""
+
 function substr(string, start, length) {
   let index = start < 0 ? string.length + start : start;
-  let finalLength = length > string.length - index ? string.length - index : length;
+  let finallength = length > string.length - index? string.length - index : length;
   
-  let resultStr = '';
-  for (let counter = 0; counter < finalLength; counter++) {
-    resultStr += string[index];
+  let newString = '';
+  for (let counter = 0; counter < finallength; counter++) {
+    newString += string[index];
     index++;
   }
-  console.log(resultStr);
+  return newString;
 }
 
 let string = 'hello world';
 
-substr(string, 2, 4);      // "llo "
-substr(string, -3, 2);     // "rl"
-substr(string, 8, 20);     // "rld"
-substr(string, 0, -20);    // ""
-substr(string, 0, 0);  // ""
+console.log(substr(string, 2, 4));      // "llo "
+console.log(substr(string, -3, 2));     // "rl"
+console.log(substr(string, 8, 20));     // "rld"
+console.log(substr(string, 0, -20));    // ""
+console.log(substr(string, 0, 0));  // ""
