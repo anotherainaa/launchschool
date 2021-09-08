@@ -37,6 +37,39 @@ function splice(array, start, count) {
   return removedValues;
 }
 
-let count = [1, 2, 3, 4, 5, 6, 7, 8];
-console.log(splice(count, 2, 5));                   // [ 3, 4, 5, 6, 7 ]
-console.log(count);                                 // [ 1, 2, 8 ]
+// let count = [1, 2, 3, 4, 5, 6, 7, 8];
+// console.log(splice(count, 2, 5));                   // [ 3, 4, 5, 6, 7 ]
+// console.log(count);                                 // [ 1, 2, 8 ]
+
+// concat function
+
+function concat(arr1, arr2) {
+  const concatArray = [];
+
+  for (let index = 0; index < arr1.length; index += 1) {
+    push(concatArray, arr1[index]);
+  }
+  
+  for (let index = 0; index < arr2.length; index += 1) {
+    push(concatArray, arr2[index]);
+  }  
+  return concatArray;
+}
+
+console.log(concat([1, 2, 3], [4, 5, 6]));       // [ 1, 2, 3, 4, 5, 6 ]
+
+function join(array, string) {
+  let newString = '';
+
+  for (let index = 0; index < array.length; index += 1) {
+    newString += String(array[index]); 
+
+    if (index !== array.length - 1) {
+      newString += string;
+    }
+  }
+  return newString;
+}
+
+console.log(join(['bri', 'tru', 'wha'], 'ck '));       // 'brick truck wha'
+console.log(join([1, 2, 3], ' and '));                 // '1 and 2 and 3'
