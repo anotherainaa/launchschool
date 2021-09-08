@@ -59,6 +59,10 @@ const unshift = (array, value) => {
 
 const shift = (array) => {
   let value = array[0];
+  
+  if (array.length === 0) {
+    return undefined;
+  } 
 
   for (let index = 0; index < array.length - 1 ; index++) {
     array[index] = array[index + 1];
