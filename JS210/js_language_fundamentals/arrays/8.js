@@ -26,3 +26,4 @@ console.log(slice([1, 2, 3], 0, 5));               // [1, 2, 3]
 const arr1 = [1, 2, 3];
 console.log(slice(arr1, 1, 3));                     // [2, 3]
 console.log(arr1);                                  // [1, 2, 3]
+
