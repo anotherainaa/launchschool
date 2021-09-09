@@ -1,24 +1,24 @@
-// Problem
-// the first argument will always be an array
-// the second argument can be an array or another value - regardless what they value is add it to the exisiting array. (not as a nested array, unless an object)
-// they should be in the same order as they appreaed in the arguments 
+// // Problem
+// // the first argument will always be an array
+// // the second argument can be an array or another value - regardless what they value is add it to the exisiting array. (not as a nested array, unless an object)
+// // they should be in the same order as they appreaed in the arguments 
 
-function concat(array1, secondArgument) {
-  let resultArray = [];
+// function concat(array1, secondArgument) {
+//   let resultArray = [];
 
-  array1.forEach(element => {
-    resultArray.push(element);
-  })
+//   array1.forEach(element => {
+//     resultArray.push(element);
+//   })
 
-  if (Array.isArray(secondArgument)) {
-    secondArgument.forEach(element => {
-      resultArray.push(element);
-    })
-  } else {
-    resultArray.push(secondArgument);
-  }
-  return resultArray;
-}
+//   if (Array.isArray(secondArgument)) {
+//     secondArgument.forEach(element => {
+//       resultArray.push(element);
+//     })
+//   } else {
+//     resultArray.push(secondArgument);
+//   }
+//   return resultArray;
+// }
 
 console.log(concat([1, 2, 3], [4, 5, 6]));          // [1, 2, 3, 4, 5, 6]
 console.log(concat([1, 2], 3));                     // [1, 2, 3]
@@ -41,3 +41,23 @@ console.log(arr3);                                  // [1, 2, 3, 4, 5, { a: "two
 
 arr3[5].b = 3;                         // or, `arr3[5]['b'] = 3;`
 obj; 
+
+// Second attempt.
+
+function concat(array, secondArgument) {
+  let newArray = [];
+
+  for (let i = 0; i < array.length; i++) {
+    newArray[i] = array[i];
+  }
+
+  if (Array.isArray(secondArgument)) {
+    for (let i = 0; i < secondArgument.length; i++) {
+      newArray[newArray.length] = secondArgument[i];
+    } 
+  } else {
+      newArray[newArray.length] = secondArgument;
+  }
+
+  return newArray;
+}
