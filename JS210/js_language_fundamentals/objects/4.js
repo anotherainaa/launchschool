@@ -38,3 +38,6 @@ console.log(myObj);
 
 // log 'hello, '
 // then 'world'
+// because of hoisting? The function gets "hoisted" up in the creation phase. 
+// Then the myFunc() which is used as a key is re-assigned the value of hello. 
+// And then re-assigned the value of world. 
