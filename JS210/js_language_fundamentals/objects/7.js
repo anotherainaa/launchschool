@@ -10,3 +10,6 @@ console.log(calculateBonus(50000, true));              // 25000
 
 // Because arguments are available locally within the function. (even though there is no parameter explicitly defined. )
 // This is because all functions have arguments function that is available locally.
+
+
+
