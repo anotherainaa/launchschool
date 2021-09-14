@@ -10,4 +10,4 @@ console.log(penultimate('Launch School is great!'));      // expected: "is"
 // But we can use methods slice, which can take negative index arguments and will take elemnts from the back of an array.
 
 // Note that we must provide an ending index which is not inclusive of the index index. 
-// therefore we can provide -1 so that we can get the string at -2
+// therefore we can provide -1 so that we can get the string at -2 index without the string at -1 index from the back of an array. 
