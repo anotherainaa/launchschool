@@ -31,4 +31,4 @@ console.log(getSelectedColumns(array1, [0]));     // [[1]];            expected:
 console.log(getSelectedColumns(array1, [0, 2]));  // [[1, 4], [3, 6]]; expected: [[1, 4, 7], [3, 6, 9]]
 console.log(getSelectedColumns(array2, [1, 2]));  // [[2, 2], [3, 3]]; expected: [[2, 2, 2], [3, 3, 3]]
 
-// 
+// the length variable gets re-assigned in the second loop.å
