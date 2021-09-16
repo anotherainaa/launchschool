@@ -28,4 +28,4 @@ one()(77, 97, 116, 114, 105, 120, 33); // when invoked, this logs - Matrix! (aft
 
 
 // Key point
-// Follow the sequence of functino calls
+// - Follow the sequence of function calls
