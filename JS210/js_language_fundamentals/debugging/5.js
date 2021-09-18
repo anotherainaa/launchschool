@@ -18,7 +18,7 @@ function logTransaction() {
     transactionLog.push(data);
 
     alert('Thank you. Data accepted.');
-  } catch(error) {
+  } catch (error) {
     alert(error.message);
   }
 }
