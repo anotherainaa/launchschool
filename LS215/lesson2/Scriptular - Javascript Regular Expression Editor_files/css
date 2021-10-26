@@ -1,0 +1,6 @@
+@font-face {
+  font-family: 'Reenie Beanie';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/l/font?kit=z7NSdR76eDkaJKZJFkkjuvWxbPi_rIOhVfTwf4GFLu3ipH8&skey=f3e3fc232dd85227&v=v11) format('woff2');
+}
