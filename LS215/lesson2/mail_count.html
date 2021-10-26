@@ -1,0 +1,60 @@
+<script src="./email_data_v2.js"></script>
+<script>
+  const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+  const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+
+  function mailCount(emailData) {
+    let emails = emailData.split('##||##');
+    let dates = emails.map(email => {
+      let date = email.split('#/#')[2];
+      return new Date(date);
+    })
+    
+    dates.sort((a, b) => a - b);
+
+    console.log(`Count of Email: ${emails.length}`);
+    logDateRange(dates[0], dates[dates.length - 1]);
+  }
+
+
+  function logDateRange(first, last) {
+    let firstDate = daysOfWeek[first.getDay()] + ' ' + months[first.getMonth()] + ' ' + first.getDate() + ' ' + first.getFullYear();
+    let lastDate = daysOfWeek[last.getDay()] + ' ' + months[last.getMonth()] + ' ' + last.getDate() + ' ' + last.getFullYear();
+    console.log(`Date Range: ${firstDate} - ${lastDate}`);
+  }
+
+  mailCount(emailData);
+
+</script>
+
+<!-- 
+Input: string representing email messages 
+Output:  Logging to the console the count of email and also the data range
+
+- parse the email and find out
+  - number of email messages found in the string. 
+  - date range of the email messages 
+
+- string contains multiple email messages separated by ##||##.
+  - can use ##||## this to split the emails
+
+- each email has five parts in the sequence below. The delimiter string #/# separates the parts.
+  - sender
+  - subject
+  - date
+  - recepient
+  - body  
+**(I may want to seperate the parts as I split them)
+
+Data Structure
+String => Nested array? => Outputting some data which is a count of email (Number) and a date range (date object)
+- from the email, I only need thed date of each email. Each date represents one email. 
+
+Algorithm 
+- split the string to get all the emails. for each email, split them by parts and get only the date in a date object 
+- count the number of emails
+- display the dates in a date range format from earliest date to latest date.   
+  - how? 
+
+-->
+
