@@ -61,7 +61,7 @@ getlongest
 
 function longestSentence(text) {
   let sentences = text.match(/([A-Z][^\.!?]*[\.!?])/g);
-  
+
   let wordCounts = sentences.map(sentence => sentence.split(" ").length);
   let longestWordCount = Math.max(...wordCounts);
   let longestSentenceIdx = wordCounts.indexOf(longestWordCount);
@@ -72,3 +72,8 @@ function longestSentence(text) {
 }
 
 longestSentence(longText);
+
+
+longestSentence("I!");
+
+longestSentence("To be or not to be? The brown fox is superlative!");
