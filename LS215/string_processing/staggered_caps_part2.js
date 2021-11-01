@@ -1,7 +1,7 @@
 function staggeredCase(string) {
   let uppercase = true;
 
-  return string.split('').map((char, index) => { 
+  return string.split('').map((char) => { 
     if (isAlphabeticCharater(char) && uppercase) {
       uppercase = false;
       return char.toUpperCase()
