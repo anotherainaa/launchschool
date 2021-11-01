@@ -1,30 +1,7 @@
-/*
-
-input:
-  - string - words
-output:
-  - every character staggered in upcase and lowercase
-
-rules
-- first character capitalized
-- followed by lowercase and then uppercase again
-- non-alphabetic characters count as characters when straggering 
-
-
-algorithm 
-
-- iterate through string, for each chracter
-  - if first lettter, uppercase it
-  
-- return resulting string. 
-
-*/
-
-
 function staggeredCase(string) {
   let newStr = '';
   let uppercase = true;
-  
+
   string.split('').forEach((char, index) => { 
 
     if (index === 0) {
