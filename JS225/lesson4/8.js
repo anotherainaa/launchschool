@@ -32,9 +32,25 @@ function logName2() {
   return name;
 }
 
-let loggedName = logName(); // The values returned by logname and saved into loggedName
+let loggedName2 = logName(); // The values returned by logname and saved into loggedName
 // is not eligible for GC. 
 // This value is the same value that is assigned to name
 
 
+// Example not eligible for GC
+
+function go() {
+  let foo = {};
+  let bar = { qux: foo };
+  foo.xyz = bar;
+}
+
+go();
+// Neither `foo` nor `bar` is eligible for GC. 
+// Because they reference each other. 
+
+for (let count = 0; count < 1000; count += 1) {
+  go();
+}
+// There are now 2000 objects still on the heap but ineligible for GC
 
