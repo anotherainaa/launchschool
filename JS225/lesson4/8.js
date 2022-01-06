@@ -7,30 +7,34 @@ function logName() {
 }
 
 logName();
-// Sarag now available for GC. 
+// Sarah now available for GC. 
+
+// Why? - The string is no longer accessible, JS can release the memory the string used
+
+// What happens if we save the name into a variable like below? 
+
+let loggedName = logName();
+// loggedName variable is assigned the value 'Sarah'
+// 'Sarah' assigned to logName is not available for GC.
+// 'Sarah' assigned to `name` is available for GC. 
 
 
-function solve(string) {
-  let temp = '';
-  let longestChain = temp;
- 
-  for (let i = 0; i < string.length; i += 1) {
-    let currentChar = string[i];
-    if ('aeiou'.includes(currentChar)) {
-      temp += currentChar;
-      console.log(temp);
-    } else {
-      console.log(temp);
-      if (temp.length > longestChain.length) {
-        longestChain = temp;
-      };
+// Above is the case for primitive values
 
-      temp = '';
-    }
-  }
+// What happens if we store the value of Sarah as a property of an object
 
-  return temp.length >= longestChain.length ? temp.length : longestChain.length;
+function logName2() {
+  let name = {
+    firstName: 'Sarah'
+  };
+
+  console.log(name.firstName);
+  return name;
 }
-console.log(solve('sudoiea')) 
-console.log(solve('codewarriors')) // => 2 io 
-console.log(solve('csuuuuio')) // => 2 io 
+
+let loggedName = logName(); // The values returned by logname and saved into loggedName
+// is not eligible for GC. 
+// This value is the same value that is assigned to name
+
+
+
