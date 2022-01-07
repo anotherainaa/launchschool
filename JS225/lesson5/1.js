@@ -11,6 +11,19 @@ AnswerPC.prototype.get = function() {
 let testAnswer = new AnswerPC(1);
 console.log(testAnswer.get());
 
+function FirmAnswerPC(value) {
+  AnswerPC.call(this, value);
+}
+
+FirmAnswerPC.prototype = Object.create(AnswerPC.prototype);
+FirmAnswerPC.prototype.constructor = FirmAnswerPC;
+
+FirmAnswerPC.prototype.get = function() {
+  return AnswerPC.prototype.get.call(this) + "!!";
+}
+
+let dummyAnswer = new FirmAnswerPC(22);
+console.log(dummyAnswer.get());
 
 // Classical model
  // ES6 supports class syntax 
