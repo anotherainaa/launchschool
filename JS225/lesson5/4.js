@@ -62,4 +62,4 @@ function Lizard() {
 }
 
 let lizzy = new Lizard();
-lizzy.scamper(); // ?
+lizzy.scamper(); // I'm scampering
