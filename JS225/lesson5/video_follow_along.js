@@ -125,24 +125,60 @@
 
 // Example 7 - Inheritance
 
-function UserCreator(name) {
-  this.name = name;
+// function UserCreator(name) {
+//   this.name = name;
+// }
+
+// UserCreator.prototype.sayName = function() {
+//   console.log(`I'm ${this.name}`);
+// }
+
+// function PaidUserCreator(paidName, balance) {
+//   UserCreator.call(this, paidName); // equivalent to calling super in class syntactical sugar
+//   this.balance = balance;
+// }
+
+// PaidUserCreator.prototype = Object.create(UserCreator.prototype);
+// PaidUserCreator.prototype.constructor = PaidUserCreator;
+
+// PaidUserCreator.prototype.increase = function() {
+//   this.balance += 1;
+// }
+
+// const user1 = new UserCreator('Dean');
+
+// const paidUser1 = new PaidUserCreator('Ryan', 3);
+
+// console.log(PaidUserCreator.prototype.constructor === PaidUserCreator);
+
+// console.log(user1.sayName());
+// console.log(paidUser1.sayName());
+
+// paidUser1.increase();
+// console.log(paidUser1.balance);
+// console.log(user1.increase()); // fails because undefined on user1
+
+// Example 8 - class syntax
+
+class UserCreator {
+  constructor(name) {
+    this.name = name;
+  }
+
+  sayName() {
+    console.log(`I'm ${this.name}`);
+  }
 }
 
-UserCreator.prototype.sayName = function() {
-  console.log(`I'm ${this.name}`);
-}
+class PaidUserCreator extends UserCreator {
+  constructor(paidName, balance) {
+    super(paidName);
+    this.balance = balance;
+  }
 
-function PaidUserCreator(paidName, balance) {
-  UserCreator.call(this, paidName); // equivalent to calling super in class syntactical sugar
-  this.balance = balance;
-}
-
-PaidUserCreator.prototype = Object.create(UserCreator.prototype);
-PaidUserCreator.prototype.constructor = PaidUserCreator;
-
-PaidUserCreator.prototype.increase = function() {
-  this.balance += 1;
+  increase() {
+    this.balance += 1;
+  }
 }
 
 const user1 = new UserCreator('Dean');
@@ -154,3 +190,5 @@ console.log(PaidUserCreator.prototype.constructor === PaidUserCreator);
 console.log(user1.sayName());
 console.log(paidUser1.sayName());
 
+paidUser1.increase();
+// console.log(paidUser1.balance);
