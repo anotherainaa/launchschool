@@ -30,6 +30,13 @@
 
 const arr = ['a', 'b'];
 console.log(arr.join('')) // ab
-
+  
 console.log(arr.__proto__ === Array.prototype);
 console.log(arr.constructor === Array);
+
+console.log(typeof arr); // 'object'
+console.log(typeof Array); // 'function'
+console.log(arr[0]); // 'a'
+console.log(arr[1]); // 'b'
+console.log(arr.prototype); // undefined
+
