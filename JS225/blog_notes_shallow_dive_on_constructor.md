@@ -6,6 +6,10 @@ let ainaa = {
 }
 
 console.log(ainaa.constructor);
+console.log(ainaa.hasOwnProperty('constructor'));
+console.log(Object.hasOwnProperty('constructor'));
+console.log(Object.prototype.hasOwnProperty('constructor'));
+console.log(Object.prototype.constructor === ainaa.constructor);
 ```
 
 We created an object literal with one property `name`. On line x, we call `constructor` property on the object `ainaa`. Where does the `constructor` property come from? From the `Object.prototype` object. 
@@ -13,6 +17,14 @@ We created an object literal with one property `name`. On line x, we call `const
 Where does JS find the `constructor` property if it is not part of the object?
 
 Since JS couldn't find it in the properties of `ainaa` object, it goes up the prototypal chain by looking at the object that `[[prototype]]` property is pointing to which is `Object.prototype`.
+
+```jsx
+function sayHi(name) {
+  console.log(name);
+}
+
+console.log(sayHi.prototype.hasOwnProperty('constructor')); // logs true
+```
 
 What objects implicitly get the `constructor` property?
 
