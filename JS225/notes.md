@@ -16,7 +16,9 @@ Since JS couldn't find it in the properties of `ainaa` object, it goes up the pr
 
 What objects implicitly get the `constructor` property?
 
-ALl functions will have a prototype property. `constructor` properties are part of the prototype and the `constructor` prorperty will point back to the function itself. This code returns `true` based on the logic we have.
+All functions will have a prototype property. `constructor` properties are part of the prototype and the `constructor` prorperty will point back to the function itself. This code returns `true` based on the logic we have.
+
+
 
 
 

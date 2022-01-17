@@ -13,3 +13,20 @@ function sayHi(name) {
 }
 
 console.log(sayHi.prototype.hasOwnProperty('constructor')); // logs true
+
+let Sponge = {
+  species: 'Sponge',
+  sayHi() {
+    console.log('Hi, I am a sponge!');
+  },
+}
+
+let spongebob = Object.create(Sponge);
+spongebob.eat = function() {
+  console.log('Yummmm I love Krabby Patties!');
+}
+
+spongebob.eat();
+spongebob.sayHi();
+console.log(spongebob.constructor);
+
