@@ -14,6 +14,7 @@ PEDAC
 
 // function expression
 
-(function random() {
-  console.log('Hello world')
-})();
+// (function random() {
+//   console.log('Hello world')
+// })();
+
