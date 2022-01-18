@@ -158,6 +158,8 @@ Prototype
 - How can we check object propert
   - `Object.getOwnPropertyNames`
   - `Object.prototype.hasOwnProperty`
+
+  
   
 
 
