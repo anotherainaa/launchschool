@@ -84,7 +84,101 @@ Why does `coffeeWithAda` and `partyAtCharles` log what they log?
 
 **Partial Function Application**
 
+```jsx
+function schedulerMaker(name) {
+  return function(event) {
+    return function() {
+      console.log(event + " with " + name + ".");
+    };
+  };
+}
+
+var adaScheduler = schedulerMaker("Ada");
+var coffeeWithAda = adaScheduler("Coffee");
+
+coffeeWithAda(); // logs coffee with ada. 
+```
+
+```jsx
+// Reduction of parameters 
+function scheduler(event, name) {
+  return function() {
+    console.log(event + " with " + name + ".");
+  };
+}
+
+function schedulerMaker(name) {
+  return function(event) {
+    scheduler(event, name);
+  };
+}
+```
+
 ## Private Data and Application Interfaces
 
+What is the biggest benefit of using closures? 
+- we can leverage 
+  - higher-order functions
+  - partial function application
+  - private application interface (IIFE, FF + closure etc)
 
 
+```jsx
+function makeCalendar(name) {
+  let user = {
+    owner: name,
+    events: [],
+  };
+
+  return {
+    addEvent(eventName, dateString) {
+      user.events.push({
+        name: eventName, 
+        date: new Date(dateString),
+      });
+
+      user.events.sort((a, b) => a.date - b.date);
+    },
+
+    listEvents() {
+      if (user.events.length > 0) {
+        console.log(`${user.name} events are:`);
+        user.events.forEach(event => console.log(`${event.date}: ${event.name}`));
+
+      } else {
+        console.log(`${user.name} has no events.`);
+      }
+    },
+  };
+}
+
+let babbageCalendar = makeCalendar("Charles Babbage");
+
+babbageCalendar.addEvent("Coffee with Ada.", "8/7/2018");
+babbageCalendar.addEvent("Difference Engine presentation.", "8/2/2018");
+
+babbageCalendar.listEvents();
+
+```
+What can we note about the code above? 
+- we can't change the `user` object in the closure
+- (However, we can do stupid things like add a new user property of the returned object)
+
+- `makeCalendar` accepts a single parameter and return an object
+- the returned object has two methods on it. 
+- the methods have acccess through closure to the `user` object
+  - and are only accessible through this object
+  - we can't change the values except through the methods or interface
+  - this is what it means that a data is private
+  - cons: 
+    - it can't be accessed in any way except through the interface, so we must create methods to interact with it and any time we need to make changes we must make changed to the original function
+    - it isn't very easily extendable. 
+
+  Summary 
+  - we learned about scope
+  - we learned about closures
+    - higher order function
+    - partial function application
+    - private data
+
+  
