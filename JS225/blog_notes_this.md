@@ -33,5 +33,14 @@ to the global object. THis is because the implicit execution context for a funct
 
 ### Method Execution Context
 
+What is a method? 
+- It's a function within an object that is a property of the object
+- It's a function that is defined within the property on an object. 
+
+
+- we define a object theatre with a property loadproject that is assigned a function. (which makes loadProjector a method)
+- we use method invocation to execute loadProjector
+- however, this time we do so in the execution context of `theater` 
+
 
 
