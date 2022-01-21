@@ -106,3 +106,13 @@ Describing how functions use `this` to reference the object and increment the pr
 What is behaviour delegation? 
 - From the runtime perpective, objects in the lower end of the prototype chain delegate "requests" to the objects on higher end of the prototype chain which is why it is called behavior delegation (apart from prototype inheritance - design perspective)
 
+
+
+What should I improve on? 
+- Code examples on
+  - Static Properties and Methods
+  - Examples on prototype chain
+  - Examples on prototype property
+  - Garbage Collection
+  - Function execution context
+  
