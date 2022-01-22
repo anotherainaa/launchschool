@@ -115,4 +115,23 @@ What should I improve on?
   - Examples on prototype property
   - Garbage Collection
   - Function execution context
-  
+
+Questions that I should practice on? 
+
+- What does it mean that closures are lexically scoped? 
+- What does `this` resolve to in this code? 
+
+```js
+
+let objA = {
+}
+```
+
+- What is IIFE, how does it work? 
+- How do we make something that closes over the same variable work? 
+
+- How does closures work? Give some examples of closures?
+
+- How does PFA work? 
+
+- What are the caveats of classes? 
