@@ -128,6 +128,9 @@ let objA = {
 ```
 
 - What is IIFE, how does it work? 
+
+- Why and when would we use IIFEs. 
+
 - How do we make something that closes over the same variable work? 
 
 - How does closures work? Give some examples of closures?
