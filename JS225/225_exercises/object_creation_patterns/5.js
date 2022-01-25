@@ -95,8 +95,7 @@ const ItemManager = {
   },
 
   inStock() {
-    // return this.items.filter(item => item.quantity > 0);
-    return this.items.filter(({ quantity }) => quantity > 0);
+    return this.items.filter(({quantity}) => quantity > 0);
   },
 
   itemsInCategory(category) {
@@ -111,7 +110,7 @@ const ReportManager = {
   },
 
   reportInStock() {
-    this.items.items.forEach(elem => console.log(elem.itemName));
+    console.log(this.items.inStock().map(({itemName}) => itemName).join(','))
   },
   
   createReporter(skuCode) {
@@ -145,22 +144,27 @@ ReportManager.reportInStock();
 
 ItemManager.update('SOCSP', { quantity: 0 });
 ItemManager.inStock();
-// returns list with the item objects for football and kitchen pot
+// // returns list with the item objects for football and kitchen pot
 ReportManager.reportInStock();
-// logs football,kitchen pot
-ItemManager.itemsInCategory('sports');
-// returns list with the item objects for basket ball, soccer ball, and football
-ItemManager.delete('SOCSP');
-ItemManager.items;
-// returns list with the remaining 3 valid items (soccer ball is removed from the list)
+// // logs football,kitchen pot
+// ItemManager.itemsInCategory('sports');
+// // returns list with the item objects for basket ball, soccer ball, and football
+// ItemManager.delete('SOCSP');
+// ItemManager.items;
+// // returns list with the remaining 3 valid items (soccer ball is removed from the list)
 
-const kitchenPotReporter = ReportManager.createReporter('KITCO');
-kitchenPotReporter.itemInfo();
-// logs
-// skuCode: KITCO
-// itemName: kitchen pot
-// category: cooking
-// quantity: 3
+// const kitchenPotReporter = ReportManager.createReporter('KITCO');
+// kitchenPotReporter.itemInfo();
+// // logs
+// // skuCode: KITCO
+// // itemName: kitchen pot
+// // category: cooking
+// // quantity: 3
 
-ItemManager.update('KITCO', { quantity: 10 });
-kitchenPotReporter.itemInfo();
+// ItemManager.update('KITCO', { quantity: 10 });
+// kitchenPotReporter.itemInfo();
+// // logs
+// // skuCode: KITCO
+// // itemName: kitchen pot
+// // category: cooking
+// // quantity: 10
