@@ -1,0 +1,12 @@
+What did I learn from the quiz? 
+- `nodeValue` returns `null` for elements. 
+- Will return the text content for text nodes. 
+- w3c will complaint if we make a deep clone of a node which contains an ID which then makes that ID no longer unique. 
+- `textContent` has a gotcha. Which is it will concatenate all the text content, remove the tags within them and also concatenate the whitespaces which we can handle with regex. (Tags disappearing being problematic).
+- We have a thing called live collection. 
+- The difference between node properties VS element properties. 
+- The difference between node properties to traverse the DOM vs element properties that traverse the DOM. 
+- What is at the top of the DOM tree. 
+- `nodeType` returns a number that represents that node type.
+- We can use `console.dir` to check details about what a node is. 
+- That we can traverse the DOM tree in any direction so long as we have a starting point. 
