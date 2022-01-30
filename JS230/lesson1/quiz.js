@@ -5,3 +5,4 @@ function walk(node, callback) {
     walk(node.childNodes[i], callback);
   }
 }
+
