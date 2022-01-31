@@ -16,4 +16,5 @@ document.addEventListener('DOMContentLoaded', () => {
       walk(node.childNodes[i], callback);
     }
   }
+
 })
