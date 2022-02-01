@@ -1,0 +1,22 @@
+div {
+  border: solid 2px blue;
+  background: lightblue;
+  padding: 2em;
+}
+
+button {
+  width: 100px;
+  height: 100px;
+  background: blue;
+  color: white;
+  position: relative;
+  top: 25px;
+  left: 25px;
+}
+
+a {
+  display: block;
+  width: 150px;
+  height: 150px;
+  background: red;
+}
