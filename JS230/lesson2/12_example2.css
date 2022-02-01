@@ -1,0 +1,9 @@
+#message {
+  padding: .5em .8em;
+  background-color: lightyellow;
+  display: inline-block;
+}
+
+a.highlight {
+  color: green;
+}
