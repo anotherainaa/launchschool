@@ -59,3 +59,4 @@ document.addEventListener('DOMContentLoaded', () => {
     makeRequest('/status/200');
   });
 });
+
