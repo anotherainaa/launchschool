@@ -4,8 +4,8 @@ function reset(options) {
       option.selected = true;
     } else {
       option.selected = false;
-      option.style.display = '';
     }
+    option.hidden = false;
   });
 }
 
@@ -46,7 +46,7 @@ function updateOptions(options, validClasses) {
       option.selected = true;
       firsOption = false;
     } else if (!validClasses.includes(option.value)) {
-      option.style.display = 'none';
+      option.hidden = true;
     }
   })
 }
@@ -92,4 +92,3 @@ document.addEventListener('DOMContentLoaded', event => {
 
 // when we hit clear, 
 // display none for all options need to be reset
-
