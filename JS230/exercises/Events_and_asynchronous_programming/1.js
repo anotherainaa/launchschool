@@ -12,12 +12,14 @@ Example
 - If the caller provides 5 callbacks, the function should run them all sometime within 10 seconds. 
  (each callback has a random time to be called upon which is within 2 seconds)
 
-- I need a random that calculates between 0 to 2 seconds fo each callback. 
+- I need a random that calculates between 0 to max seconds fo each callback
 - callbacks are being called randomly at random times
-- the reason for that is because they all get a random time assigned to them, making it random 
+- the reason for that is because they all get a random time assigned to them so there's  no need to randomize the callbacks
 
 Algorithm
+- calculate max seconds
 - get a random second
+- log the time
 - call each callback with the randomize seconds 
 
 
