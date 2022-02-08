@@ -1,6 +1,5 @@
 /*
 
-
 Input: API - ajax from API? 
 Output: 
 - Alert as "key:value" pairs
@@ -19,7 +18,5 @@ Edge cases
 - Note that it DOESN'T ALWAYS HAPPEN
 How to handle it? 
   - if more than 5 seconds passed (5000ms), cancel the retrieval(avo) and inform the user to try again.
-
-
 
 */
