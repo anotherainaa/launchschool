@@ -53,4 +53,4 @@ $("a[href^='#']")
 
 // Question 11
 
-$('.block')
+$('[class*=block]');
