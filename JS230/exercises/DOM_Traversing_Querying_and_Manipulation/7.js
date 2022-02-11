@@ -1,9 +1,28 @@
-function nodesToArr() {
-  let body = document.body;
-  let arr = [];
+// function nodesToArr(parent = document.body) {
+//   const nodesArr = [parent.tagName, []];
 
-  arr.push(body)
+//   for (let child of parent.children) {
+//     nodesArr[1].push(nodesToArr(child));
+//   }
+
+//   return nodesArr;
+// }
+
+// console.log(nodesToArr());
+
+function nodesToArr(node) {
+  let childArr = [];
+
+  if (node.children.length === 0) {
+    return [node.tagName, childArr];
+  } else {
+    for (let i = 0; i < node.children.length; i++) {
+      childArr.push(nodesToArr(node.children[i]));
+    }
+    return [node.tagName, childArr];
+  }
 }
+
 
 
 // ["BODY",[["HEADER",[]],["MAIN",[]],["FOOTER",[]]]]
