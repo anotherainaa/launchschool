@@ -58,16 +58,27 @@ let tds = document.querySelectorAll('.infobox td');
 let cell;
 let link;
 
-for (let index = 0; index < tds.length; index += 1) {
-  cell = tds[index];
-  console.log(cell);
-  
+[...tds].forEach(cell => {
+  console.log(cell); 
+
   keys.forEach(key => {
-    if (cell.textContent.indexOf(key) !== -1) {
+    if (cell.textContent.includes(key) !== -1) {
       link = cell.nextElementSibling.firstElementChild;
       classification[key] = link.textContent;
     }
   })
-}
+})
+
+// for (let index = 0; index < tds.length; index += 1) {
+//   cell = tds[index];
+//   console.log(cell);
+
+//   keys.forEach(key => {
+//     if (cell.textContent.indexOf(key) !== -1) {
+//       link = cell.nextElementSibling.firstElementChild;
+//       classification[key] = link.textContent;
+//     }
+//   })
+// }
 
 console.log(classification);
