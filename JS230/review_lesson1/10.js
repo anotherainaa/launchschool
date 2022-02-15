@@ -94,5 +94,8 @@ for (let index = 0; index < intros.length; index += 1) {
 // Safer to search for specific code than to rely on relative positions of elements. 
 
 
+// we use CSS selector _______ to target elements we want
+// querySelector also works on elements, not just document.
+
 
 
