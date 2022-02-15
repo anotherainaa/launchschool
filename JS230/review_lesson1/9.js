@@ -176,3 +176,16 @@ walk(document.body, node => {
 
 let pngCount = images.filter(img => img.getAttribute('src').match(/png$/).length);
 console.log(pngCount); 
+
+
+// Question 6
+
+let a = document.querySelectorAll('a');
+
+[...a].forEach(link => link.style.color = 'red');
+
+walk(document.body, node => {
+  if (node.tagName === 'A') {
+    node.style.color = 'red';
+  }
+})
