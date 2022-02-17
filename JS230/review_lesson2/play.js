@@ -13,12 +13,13 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentTarget = event.currentTarget.tagName;
     let phaseName = phases[event.eventPhase];
     let message = 'Click event triggered during ' + phaseName + ' phase at ' + currentTarget;
+    debugger;
     message += ' And this event was previously handled at ' + event.previouslyHandledTagName;
     messages.innerHTML += message + '<br/>';
     event.previouslyHandledTagName = currentTarget;
   }
 
-  html.addEventListener('click', logClickedMessage);
+  html.addEventListener('click', logClickedMessage, true);
   body.addEventListener('click', logClickedMessage);
-  button.addEventListener('click',logClickedMessage);
+  button.addEventListener('click',logClickedMessage, true);
 })
