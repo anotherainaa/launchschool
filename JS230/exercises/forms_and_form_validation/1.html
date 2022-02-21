@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html>
+  <head>
+    <title>Forms - Exercise 1</title>
+    <script src="1.js"></script>
+  </head>
+  <body>
+    <form action="POST" id="form">
+      <label for="first_name">First Name</label>
+      <input name="first_name" type="text" id="first_name" placeholder="Jane" required><br>
+      <label for="last_name">Last Name</label>
+      <input name="last_name" type="text" id="last_name" placeholder="Doe" required><br>
+      <label for="email">Email</label>
+      <input name="email" type="email" id="email" placeholder="jane@example.com" required><br>
+      <label for="password" id="pass">Password</label>
+      <input type="password" name="password" id="password" required><br>
+      <label for="phone">Phone Number</label>
+      <input type="tel" pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" id="phone" placeholder="111-222-3333"><br>
+      <input type="submit" value="Sign Up">
+    </form>
+  </body>
+</html>

@@ -9,17 +9,34 @@ xhr.open('GET', 'https://api.github.com/repos/rails/rails');
 console.log('OPENED', xhr.readyState); 
 
 
-xhr.onreadystatechange = function() {
+// The equivalent to the `readystatechange` event. 
+
+xhr.addEventListener('readystatechange', () => {
   console.log('state changing', xhr.readyState); // this allows us to see the change form 2 to 3 and 3 to 4
-}
+})
 
-xhr.onprogress = function() {
-    console.log('LOADING', xhr.readyState); 
-};
+// xhr.onreadystatechange = function() {
+//   console.log('state changing', xhr.readyState); // this allows us to see the change form 2 to 3 and 3 to 4
+// }
 
-xhr.onload = function() {
-  console.log('DONE', xhr.readyState);
-}
+// The equivalent to the onprogress GlobalEventHandler
+
+xhr.addEventListener('progress', event => {
+  console.log('LOADING', xhr.readyState); 
+})
+
+// xhr.onprogress = function() {
+//   console.log('LOADING', xhr.readyState); 
+// };
+
+// The equivalent to load GlobalEventHandler
+xhr.addEventListener('load', () => {
+  console.log('LOAD DONE', xhr.readyState);
+});
+
+// xhr.onload = function() {
+//   console.log('LOAD DONE', xhr.readyState);
+// }
 
 xhr.send(); // => this will trigger on progress, state 3, and on load, state 4
 
