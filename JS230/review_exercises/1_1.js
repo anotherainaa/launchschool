@@ -5,3 +5,13 @@ function walk(node, callback) {
     walk(node.childNodes[i], callback);
   }
 }
+
+let count = 0;
+
+// start from HTML
+walk(document.firstChild, (node) => {
+  console.log(node);
+  count += 1;
+})
+
+console.log(count);

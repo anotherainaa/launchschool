@@ -10,7 +10,6 @@ console.log('OPENED', xhr.readyState);
 
 
 // The equivalent to the `readystatechange` event. 
-
 xhr.addEventListener('readystatechange', () => {
   console.log('state changing', xhr.readyState); // this allows us to see the change form 2 to 3 and 3 to 4
 })
@@ -38,8 +37,16 @@ xhr.addEventListener('load', () => {
 //   console.log('LOAD DONE', xhr.readyState);
 // }
 
-xhr.send(); // => this will trigger on progress, state 3, and on load, state 4
+xhr.addEventListener('abort', () => {
+  console.log('request aborted');
+})
 
+xhr.addEventListener('loadend', () => {
+  console.log('loadend fired');
+})
+
+xhr.send(); // => this will trigger on progress, state 3, and on load, state 4
+xhr.abort();
 // const xhr = new XMLHttpRequest(),
 //     method = "GET",
 //     url = 'https://api.github.com/repos/rails/rails';
